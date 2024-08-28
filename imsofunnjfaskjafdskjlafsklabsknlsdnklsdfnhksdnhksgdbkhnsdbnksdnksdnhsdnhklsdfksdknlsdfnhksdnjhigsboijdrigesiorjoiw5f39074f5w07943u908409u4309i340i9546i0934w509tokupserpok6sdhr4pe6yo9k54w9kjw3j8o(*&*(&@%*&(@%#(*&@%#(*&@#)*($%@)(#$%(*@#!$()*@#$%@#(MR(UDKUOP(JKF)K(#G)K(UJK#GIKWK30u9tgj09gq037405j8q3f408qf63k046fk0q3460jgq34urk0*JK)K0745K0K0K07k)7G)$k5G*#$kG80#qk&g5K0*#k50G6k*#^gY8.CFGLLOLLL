@@ -45,7 +45,6 @@ local function Notify(Text : string, Duration : number, SoundId : number)
         Frame.Position = UDim2.new(0, 100, 0, 10)
         Frame.BackgroundColor3 = Color3.new(.1, .1, .1)
         Frame.BorderSizePixel = 0
-        Frame.ZIndex = 100
 
         UIStroke.Color = Color3.new(.1 / 2, .1 / 2, .1 / 2)
         UIStroke.Thickness = 1
@@ -115,10 +114,8 @@ local function Notify(Text : string, Duration : number, SoundId : number)
 
         Frame:Destroy()
     end)
-
-    return Frame
 end
 
-Notify('Boo! did i scare you? fat fucking nigger', 10)
+Notify('Boo! did i scare you fat fucking nigger', 10, 5567523008)
 
 return Notify
