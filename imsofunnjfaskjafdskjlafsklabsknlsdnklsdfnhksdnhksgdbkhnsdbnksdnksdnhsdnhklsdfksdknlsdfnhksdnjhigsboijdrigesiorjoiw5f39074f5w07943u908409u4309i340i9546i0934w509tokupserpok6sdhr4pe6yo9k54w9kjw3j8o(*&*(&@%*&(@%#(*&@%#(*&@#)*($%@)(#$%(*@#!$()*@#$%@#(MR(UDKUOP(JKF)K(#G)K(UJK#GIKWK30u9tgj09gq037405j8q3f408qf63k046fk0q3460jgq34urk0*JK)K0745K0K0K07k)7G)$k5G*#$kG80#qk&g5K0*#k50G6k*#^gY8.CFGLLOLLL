@@ -115,4 +115,6 @@ local function Notify(Text : string, Duration : number, SoundId : number)
     end)
 end
 
-Notify('hello')
+Notify('boo did i scare you?')
+
+return Notify
