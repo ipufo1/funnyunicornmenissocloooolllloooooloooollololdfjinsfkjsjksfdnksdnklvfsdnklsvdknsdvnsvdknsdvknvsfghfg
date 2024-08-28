@@ -25,12 +25,12 @@ local Holder = ScreenGui:FindFirstChild('NotifArea') or Instance.new('Frame'); d
 end
 
 local function GetTextBounds(Text, Font)
-    return game:GetService('TextService'):GetTextSize(Text, 10, Font or Enum.Font.RobotoMono, Vector2.new(1920, 1080))
+    return game:GetService('TextService'):GetTextSize(Text, 14, Font or Enum.Font.RobotoMono, Vector2.new(1920, 1080))
 end
 
 local function Notify(Text : string, Duration : number, SoundId : number)
     local TextBounds = GetTextBounds(Text)
-    local YOffset = (TextBounds.Y + 12)
+    local YOffset = (TextBounds.Y + 7)
     local WaitTime = .2
 
     local Frame = Instance.new('Frame')
@@ -45,6 +45,7 @@ local function Notify(Text : string, Duration : number, SoundId : number)
         Frame.Position = UDim2.new(0, 100, 0, 10)
         Frame.BackgroundColor3 = Color3.new(.1, .1, .1)
         Frame.BorderSizePixel = 0
+        Frame.ZIndex = 100
 
         UIStroke.Color = Color3.new(.1 / 2, .1 / 2, .1 / 2)
         UIStroke.Thickness = 1
@@ -90,17 +91,18 @@ local function Notify(Text : string, Duration : number, SoundId : number)
         Label.Position = UDim2.new(0, 7, 0, 0)
         Label.TextXAlignment = Enum.TextXAlignment.Left
         Label.Size = UDim2.new(1, -4, 1, 0)
-        Label.TextSize = 10
+        Label.TextSize = 14
         Label.Text = Text
         Label.Parent = Frame
         Label.TextColor3 = Color3.new(1, 1, 1)
         Label.TextStrokeColor3 = Color3.new()
         Label.BackgroundTransparency = 10
+        Label.FontFace = Font.fromEnum(Enum.Font.RobotoMono)
     end
 
     task.spawn(function()
         game:GetService('TweenService'):Create(Frame, TweenInfo.new(WaitTime, Enum.EasingStyle.Sine), {
-            Size = UDim2.new(0, (TextBounds.X + 12) + 5, 0, YOffset)
+            Size = UDim2.new(0, TextBounds.X + 12, 0, YOffset)
         }):Play()
 
         task.wait(Duration or 5)
@@ -113,8 +115,10 @@ local function Notify(Text : string, Duration : number, SoundId : number)
 
         Frame:Destroy()
     end)
+
+    return Frame
 end
 
-Notify('boo did i scare you?')
+Notify('Boo! did i scare you? fat fucking nigger', 10)
 
 return Notify
